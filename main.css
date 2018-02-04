@@ -4,9 +4,10 @@
     margin: 0;
 }
 
-.graf-figure
+.progressiveMedia
 {
-    position: relative;
+    background: #eee;
+    width: 100%;
 }
 
 .aspectRatioPlaceholder
@@ -29,6 +30,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    transition: background .2s;
 }
 
 .progressiveMedia-thumbnail
@@ -45,30 +47,11 @@
     width: 100%;
     height: 100%;
     margin: auto;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
 
-.js-progressiveMedia-canvas
-{
-    visibility: visible;
-    opacity: 0;
-    backface-visibility: hidden;
-    transition: visibility 0s linear .5s, opacity .1s .4s;
-}
-
-.js-progressiveMedia-canvas.loading
-{
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 0s linear .5s, opacity .1s .4s;
-}
-
-.js-progressiveMedia-canvas.loaded
-{
     visibility: hidden;
     opacity: 0;
-    transition: all ease .3s;
+    backface-visibility: hidden;
 }
 
 .progressiveMedia-image
@@ -83,25 +66,32 @@
     box-sizing: border-box;
     backface-visibility: hidden;
     z-index: 100;
-}
 
-.js-progressiveMedia-image
-{
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s linear 0s, opacity .4s 0s;
-    max-width: 100%;
 }
 
-.js-progressiveMedia-image.loaded
+.is-canvasLoaded .progressiveMedia-canvas
 {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s linear 0s, opacity .4s .15s;
+    -webkit-transition: visibility 0s linear 0s, opacity .4s 0s;
+    transition: visibility 0s linear 0s, opacity .4s 0s;
 }
 
-.progressiveMedia
+.is-imageLoaded .progressiveMedia-canvas
 {
-    background: #e0dcdc;
-    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: visibility 0s linear .5s, opacity .1s .4s;
+    transition: visibility 0s linear .5s, opacity .1s .4s;
+    backface-visibility: hidden;
+}
+
+.is-imageLoaded .progressiveMedia-image
+{
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: visibility 0s linear 0s, opacity .4s 0s;
+    transition: visibility 0s linear 0s, opacity .4s 0s;
 }
