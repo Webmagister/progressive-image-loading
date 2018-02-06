@@ -32,12 +32,48 @@
         ctx.drawImage(this, -10, -10, canvasWidth + 20, canvasHeight + 20);
     }
 });
-[].forEach.call(document.querySelectorAll('img[data-src]'), function (img)
+
+window.onload = function ()
 {
-    img.setAttribute('src', img.getAttribute('data-src'));
-    img.onload = function ()
+    var listImg = document.querySelectorAll('img[data-src]');
+    if (listImg.length !== 0)
     {
-        img.removeAttribute('data-src');
-        img.parentNode.classList.add('is-imageLoaded');
-    };
-});
+        for (var i = 0, len = listImg.length; i < len; i++)
+        {
+            SetHandler(listImg[i]);
+        }
+    }
+};
+
+window.onscroll = function ()
+{
+    var listImg = document.querySelectorAll('img[data-src]');
+    if (listImg.length !== 0)
+    {
+        for (var i = 0, len = listImg.length; i < len; i++)
+        {
+            SetHandler(listImg[i]);
+        }
+    }
+};
+
+function SetHandler(img)
+{
+    var offsetTop = img.getBoundingClientRect().top + document.body.scrollTop;
+    var scrolled = document.body.scrollTop;
+
+    if (scrolled === 0)
+    {
+        scrolled = document.documentElement.clientHeight;
+    }
+    if (scrolled > offsetTop)
+    {
+        img.setAttribute('src', img.getAttribute('data-src'));
+
+        img.onload = function ()
+        {
+            img.removeAttribute('data-src');
+            img.parentNode.classList.add('is-imageLoaded');
+        };
+    }
+}
