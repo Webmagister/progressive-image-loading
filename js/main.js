@@ -45,15 +45,21 @@ window.onload = function ()
     }
 };
 
+var countEvent = 0;
 window.onscroll = function ()
 {
-    var listImg = document.querySelectorAll('img[data-src]');
-    if (listImg.length !== 0)
+    ++countEvent;
+    if (countEvent === 3)
     {
-        for (var i = 0, len = listImg.length; i < len; i++)
+        var listImg = document.querySelectorAll('img[data-src]');
+        if (listImg.length !== 0)
         {
-            SetHandler(listImg[i]);
+            for (var i = 0, len = listImg.length; i < len; i++)
+            {
+                SetHandler(listImg[i]);
+            }
         }
+        countEvent = 0;
     }
 };
 
